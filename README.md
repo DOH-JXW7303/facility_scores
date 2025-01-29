@@ -27,7 +27,7 @@ WITH FilteredVaccinationData AS (
     FROM raw_waiis.vaccination_master
     WHERE YEAR(VACC_DATE) = 2024
 )
-
+```sql
 
 ### 2. Main Query
 Aggregates metrics and calculates scores for each facility:
@@ -39,7 +39,7 @@ Aggregates metrics and calculates scores for each facility:
 Each metric is calculated in a separate subquery and joined with the facility master table:
 
 #### Timeliness Metrics:
-```sql
+
 SELECT
     VM.ASIIS_FAC_ID,
     COUNT(*) AS Total_Records,

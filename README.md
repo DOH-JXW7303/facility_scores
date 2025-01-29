@@ -27,7 +27,7 @@ WITH FilteredVaccinationData AS (
     FROM raw_waiis.vaccination_master
     WHERE YEAR(VACC_DATE) = 2024
 )
-```sql
+```
 
 ### 2. Main Query
 Aggregates metrics and calculates scores for each facility:

@@ -28,10 +28,8 @@ Aggregates metrics and calculates scores for each facility:
 - **Scores:** Cumulative score calculated based on defined thresholds for each metric.
 
 ### 3. Subqueries
-Each metric is calculated in a separate subquery and joined with the facility master table:
-
-#### Missing Data Metrics:
-Calculates percentages of missing VFC eligibility, funding source, lot numbers, race, and ethnicity.
+Each metric is calculated in a separate subquery and joined with the facility master table.
+They calculates percentages of late record submission, missing VFC eligibility, funding source, lot numbers, race, and ethnicity.
 
 ### 4. Final Results
 Filters and orders facilities by:

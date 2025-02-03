@@ -21,14 +21,6 @@ This project evaluates the data completeness and timeliness of facilities based 
 ### 1. Filter Vaccination Data
 Filters the `vaccination_master` table to include only records where the vaccination date falls within a certain time period.
 
-```sql
-WITH FilteredVaccinationData AS (
-    SELECT *
-    FROM raw_waiis.vaccination_master
-    WHERE YEAR(VACC_DATE) = 2024
-)
-```
-
 ### 2. Main Query
 Aggregates metrics and calculates scores for each facility:
 - **Facility Information:** Includes facility ID and name from `facility_master`.
@@ -37,16 +29,6 @@ Aggregates metrics and calculates scores for each facility:
 
 ### 3. Subqueries
 Each metric is calculated in a separate subquery and joined with the facility master table:
-
-#### Timeliness Metrics:
-```sql
-SELECT
-    VM.ASIIS_FAC_ID,
-    COUNT(*) AS Total_Records,
-    ROUND(100.0 * COUNT(CASE WHEN DATEDIFF(DAY, VM.VACC_DATE, VM.INSERT_STAMP) > 1 THEN 1 ELSE NULL END) / COUNT(*), 2) AS Beyond_One_Day_Percent
-FROM FilteredVaccinationData AS VM
-GROUP BY VM.ASIIS_FAC_ID
-```
 
 #### Missing Data Metrics:
 Calculates percentages of missing VFC eligibility, funding source, lot numbers, race, and ethnicity.
@@ -57,17 +39,6 @@ Filters and orders facilities by:
 - **Total records (descending)**
 - **Metrics percentages (descending)**
 
-```sql
-ORDER BY
-    Scores DESC,
-    T.Total_Records DESC,
-    T.Beyond_One_Day_Percent DESC,
-    V.Missing_VFC_Eligible_Percent DESC,
-    F.Missing_Funding_Source_Percent DESC,
-    L.Missing_Lot_Number_Percent DESC,
-    R.Missing_Race_Percent DESC,
-    E.Missing_Ethnicity_Percent DESC;
-```
 
 ## Scoring Criteria
 For each metric, thresholds are defined to award points as follows:

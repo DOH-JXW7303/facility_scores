@@ -1,5 +1,5 @@
 
-# Facility Scoreing Query
+# Facility Scoring Query
 
 ## Overview
 This project evaluates the data completeness and timeliness of facilities based on WAIIS vaccination data. The query calculates a comprehensive facility score by assessing six critical metrics, with scores ranging from 0 to 12 for each facility. High scores indicate excellent data management practices, while low scores highlight areas for improvement.
